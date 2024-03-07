@@ -5,18 +5,18 @@ using namespace std;
 
 const int FILEIRAS = 15;
 const int POLTRONAS = 40;
-const double PRECO_ALTO = 50.00;
-const double PRECO_MEDIO = 30.00;
-const double PRECO_BAIXO = 15.00;
+const double PRECO_Alto = 50.00;
+const double PRECO_Medio = 30.00;
+const double PRECO_Baixo = 15.00;
 
 vector<vector<bool>> sala(FILEIRAS, vector<bool>(POLTRONAS, false));
 double faturamento = 0.0;
 int lugaresOcupados = 0;
 
 double precoPoltrona(int fileira) {
-    if (fileira >= 1 && fileira <= 5) return PRECO_ALTO;
-    if (fileira >= 6 && fileira <= 10) return PRECO_MEDIO;
-    if (fileira >= 11 && fileira <= 15) return PRECO_BAIXO;
+    if (fileira >= 1 && fileira <= 5) return PRECO_Alto;
+    if (fileira >= 6 && fileira <= 10) return PRECO_Medio;
+    if (fileira >= 11 && fileira <= 15) return PRECO_Baixo;
     return 0.0;
 }
 
