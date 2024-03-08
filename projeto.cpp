@@ -1,23 +1,20 @@
 #include <iostream>
-#include <vector>
-
 using namespace std;
 
 const int FILEIRAS = 15;
 const int POLTRONAS = 40;
-const double PRECO_Alto = 50.00;
-const double PRECO_Medio = 30.00;
-const double PRECO_Baixo = 15.00;
+const double PRECO_B = 15.00;
+const double PRECO_M = 30.00;
+const double PRECO_A = 50.00;
 
-vector<vector<bool>> sala(FILEIRAS, vector<bool>(POLTRONAS, false));
+bool sala[FILEIRAS][POLTRONAS] = {false};
 double faturamento = 0.0;
 int lugaresOcupados = 0;
 
 double precoPoltrona(int fileira) {
-    if (fileira >= 1 && fileira <= 5) return PRECO_Alto;
-    if (fileira >= 6 && fileira <= 10) return PRECO_Medio;
-    if (fileira >= 11 && fileira <= 15) return PRECO_Baixo;
-    return 0.0;
+    if (fileira >= 1 && fileira <= 5) return PRECO_A;
+    else if (fileira >= 6 && fileira <= 10) return PRECO_M;
+    else return PRECO_B; // Assume que a fileira é entre 11 e 15, validação feita previamente
 }
 
 void reservarPoltrona() {
@@ -45,13 +42,9 @@ void reservarPoltrona() {
 void mapaOcupacao() {
     for (int i = 0; i < FILEIRAS; i++) {
         for (int j = 0; j < POLTRONAS; j++) {
-            if (sala[i][j]) {
-                cout << "#";
-            } else {
-                cout << ".";
-            }
+            cout << (sala[i][j] ? "#" : ".");
         }
-        cout << endl;
+        cout << "\n";
     }
 }
 
@@ -62,28 +55,16 @@ void faturamentoAtual() {
 
 int main() {
     int opcao;
-
     do {
         cout << "0. Finalizar\n1. Reservar poltrona\n2. Mapa de ocupação\n3. Faturamento\nEscolha uma opção: ";
         cin >> opcao;
-
         switch (opcao) {
-            case 1:
-                reservarPoltrona();
-                break;
-            case 2:
-                mapaOcupacao();
-                break;
-            case 3:
-                faturamentoAtual();
-                break;
-            case 0:
-                cout << "Sistema finalizado." << endl;
-                break;
-            default:
-                cout << "Opção inválida!" << endl;
+            case 1: reservarPoltrona(); break;
+            case 2: mapaOcupacao(); break;
+            case 3: faturamentoAtual(); break;
+            case 0: cout << "Sistema finalizado." << endl; break;
+            default: cout << "Opção inválida!" << endl;
         }
     } while (opcao != 0);
-
     return 0;
 }
